@@ -121,7 +121,7 @@ const XlsxToJson = () => {
       <div id='myInput'>
         <pre>
             {StrictNumberChars(`0175643810000000NOMEEMPRES0903${year}${stringMonth}${stringDay}`, 199)}
-
+</pre><pre>
             {MapValues()}
             
             {StrictNumberChars(`9${AddZeros(json[0].TotalLinhas,4)}${FormatValue(json[0].ValorTotal.toFixed(2)).padEnd(38, '0')}`, 199)}
