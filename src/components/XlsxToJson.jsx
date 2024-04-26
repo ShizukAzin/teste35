@@ -1,7 +1,6 @@
 import * as xlsx from 'xlsx'
 import * as React from 'react'
 
-
 const XlsxToJson = () => {
   const [json, setJson] = React.useState([ { "Documento": "1111", "NomeCliente":"Teste", "ContaCapital":"1111111", "ValorIntegralizaçãoFolha": "222", "TotalLinhas": "3333", "ValorTotal":"44444444"}  ])
   let newDate = new Date()
@@ -13,7 +12,7 @@ const XlsxToJson = () => {
   if (stringMonth.length < 2) stringMonth = '0' + stringMonth
   let year = newDate.getFullYear()
   
-  
+    
   const StrictNumberChars = (str, number) => {
 
     while (str.length > number){
@@ -53,12 +52,16 @@ const XlsxToJson = () => {
       )
     }
     
+
+
     const MapValues = () => {
       try {
         return(
           json.map((item) => (
+            
             <pre>
-        {StrictNumberChars(`1C${AddZeros(item.ContaCapital,9)}${item.NomeCliente}`, 47)}
+              
+        {StrictNumberChars(`1D${AddZeros(item.ContaCapital,9)}${RemoverAcentos(item.NomeCliente)}`, 47)}
         {`    `}
         {`00000000000000            `}
         {AddZeros(`${item.ContaCapital}`,12)}
@@ -67,6 +70,7 @@ const XlsxToJson = () => {
         {`                                                                        `}
         </pre>
         ))
+        
         )} catch (error) {
           console.error(error); // You might send an exception to your error tracker like AppSignal
           return (
@@ -116,12 +120,12 @@ const XlsxToJson = () => {
       <h1> Resultado: </h1>
       <div id='myInput'>
         <pre>
-            {StrictNumberChars(`0175643810000000NOMEEMPRES0402${year}${stringMonth}${stringDay}`, 199)}
+            {StrictNumberChars(`0175643810000000NOMEEMPRES0903${year}${stringMonth}${stringDay}`, 199)}
 
             {MapValues()}
             
-            {StrictNumberChars(`9${AddZeros(json[0].TotalLinhas,26)}${FormatValue(json[0].ValorTotal)}`, 199)}
-            {`\u000A`}
+            {StrictNumberChars(`9${AddZeros(json[0].TotalLinhas,4)}${FormatValue(json[0].ValorTotal.toFixed(2)).padEnd(38, '0')}`, 199)}
+{`\u000A`}
       </pre>   
     </div>
   </div>
@@ -149,3 +153,7 @@ const XlsxToJson = () => {
 }
 
 export default XlsxToJson;
+
+function RemoverAcentos(texto) {
+    return texto.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
