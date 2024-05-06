@@ -60,15 +60,15 @@ const XlsxToJson = () => {
           json.map((item) => (
             
             <pre>
-              
-        {StrictNumberChars(`1D${AddZeros(item.ContaCapital,9)}${RemoverAcentos(item.NomeCliente)}`, 47)}
-        {`    `}
-        {`00000000000000            `}
-        {AddZeros(`${item.ContaCapital}`,12)}
-        {`                    `}
-        {FormatValue(`${item.ValorIntegralizaçãoFolha}   `)}
-        {`                                                                        `}
-        </pre>
+            {StrictNumberChars(`1D${AddZeros(item.ContaCapital,9)}${RemoverAcentos(item.NomeCliente)}`, 47)}
+            {`    `}
+            {`00000000000000            `}
+            {AddZeros(`${item.ContaCapital}`,12)}
+            {`                    `}
+            {FormatValue(`${item.ValorIntegralizaçãoFolha}   `)}
+            {' '.repeat(118 - (47 + 4 + 20 + 12 + 20 + item.ValorIntegralizaçãoFolha.toString().length))}Pagto minimo cartao
+            {`                                       `}
+          </pre>
         ))
         
         )} catch (error) {
